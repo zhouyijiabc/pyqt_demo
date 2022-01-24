@@ -20,7 +20,7 @@ class FirstMainWindow(QMainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon('q5.png'))
+    app.setWindowIcon(QIcon('../q5.png'))
     main = FirstMainWindow()
     main.show()
     sys.exit(app.exec_())

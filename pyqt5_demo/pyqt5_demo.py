@@ -145,10 +145,10 @@ class WidgetGallery(QDialog):
     def create_bottom_right_group_box(self):
         self.bottom_right_group = QGroupBox('第三组')
 
-        lineedit = QLineEdit('str3')
-        lineedit.setEchoMode(QLineEdit.Password)
+        linted = QLineEdit('str3')
+        linted.setEchoMode(QLineEdit.Password)
         name_label = QLabel('密码')
-        name_label.setBuddy(lineedit)
+        name_label.setBuddy(linted)
 
         spinbox = QSpinBox(self.bottom_right_group)
         spinbox.setValue(20)
@@ -167,7 +167,7 @@ class WidgetGallery(QDialog):
         dial.setNotchesVisible(True)
 
         layout = QGridLayout()
-        layout.addWidget(lineedit, 0, 0, 1, 0)
+        layout.addWidget(linted, 0, 0, 1, 0)
         layout.addWidget(spinbox, 1, 0, 1, 2)
         layout.addWidget(datetimeedit, 2, 0, 1, 2)
         layout.addWidget(slide, 3, 0)
@@ -188,7 +188,7 @@ class WidgetGallery(QDialog):
     def advance_progressbar(self):
         cur_val = self.progressbar.value()
         max_val = self.progressbar.maximum()
-        self.progressbar.setValue(cur_val + (max_val - cur_val)/100)
+        self.progressbar.setValue(cur_val + (max_val - cur_val) / 100)
 
     # 改变模板
     def chang_palette(self):
@@ -200,9 +200,6 @@ class WidgetGallery(QDialog):
     # 改变样式
     def chang_style(self, style_name):
         QApplication.setStyle(QStyleFactory.create(style_name))
-
-
-
 
 
 if __name__ == '__main__':
