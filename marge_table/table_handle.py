@@ -51,6 +51,7 @@ class TableHandle:
 
 if __name__ == '__main__':
     file_path = r'J:\PythonProject\python_demo\测试库demo'
-    save_name = 'marge.xlsx'
+    save_name = 'marge1.xlsx'
     a = TableHandle(file_path=file_path, save_name=save_name)
     a.marge_table(is_sort=True, sort_key='birthdate')
+    # a
