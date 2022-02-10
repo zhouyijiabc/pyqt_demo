@@ -18,23 +18,12 @@ class Run:
         self.window.shutdown_timeEdit.timeChanged.connect(self.get_shutdown_time)
         self.window.create_plan_pushButton.clicked.connect(self.create_shutdown)
         self.window.cancel_pushButton.clicked.connect(self.cancel_shutdown)
-        # self.window.default_path_radion.clicked.connect(self.hide_btu2)
-        # self.marge_path = os.getcwd()
 
-        # self.window.statusbar.showMessage(self.marge_path, 3000)
-        #
-        # self.window.custom_btu.clicked.connect(self.change_path_btu)
-        #
-        # self.window.custom_path_radion.clicked.connect(self.open_custom_path)
-        #
-        # self.window.is_sort_checkbox.clicked.connect(self.open_sort)
-        #
-        # self.window.marg_btu.clicked.connect(self.marge_file)
+        self.window.get_wechat_path_pushButton.clicked.connect(self.get_wechat_path)
 
         self.apply_stylesheet = apply_stylesheet(self.app, theme='dark_teal.xml')
         self.main.show()
         sys.exit(self.app.exec_())
-
 
     def get_shutdown_time(self):
         self.set_time = self.window.shutdown_timeEdit.time().toPyTime()
@@ -53,7 +42,10 @@ class Run:
         res_text = shutdown.stop_shutdown()
         self.window.statusbar.showMessage(res_text, 5000)
 
-
+    def get_wechat_path(self):
+        path = QFileDialog.getOpenFileName(None, '请选择微信执行文件')
+        print(path[0])
+        self.window.wechat_lineEdit.setText(path[0])
 
 
 if __name__ == '__main__':
