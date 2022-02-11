@@ -18,6 +18,9 @@ class Run:
         self.window.shutdown_timeEdit.timeChanged.connect(self.get_shutdown_time) # 获取关机时间
         self.window.create_plan_pushButton.clicked.connect(self.create_shutdown) # 创建关机计划
         self.window.cancel_pushButton.clicked.connect(self.cancel_shutdown) # 取消关机计划
+        self.window.shutdown_now_pushButton.clicked.connect(self.shutdown_now) # 立即关机
+
+
 
         self.window.get_wechat_path_pushButton.clicked.connect(self.get_wechat_path) # 获取微信路径
         self.window.start_wechat_pushButton.clicked.connect(self.open_wechat)# 开启微信
@@ -28,7 +31,7 @@ class Run:
         self.window.default_path_radioButton.clicked.connect(self.close_get_marge_btu) # 关闭自定义路径按钮
         self.window.get_marge_path_pushButton.clicked.connect(self.get_marge_path) # 获取合并文件夹路径
 
-
+        self.window.lock_now_pushButton.clicked.connect(self.lock_window)
 
 
         self.apply_stylesheet = apply_stylesheet(self.app, theme='dark_teal.xml')
@@ -37,8 +40,7 @@ class Run:
 
     def get_shutdown_time(self):
         self.set_time = self.window.shutdown_timeEdit.time().toPyTime()
-        print(self.set_time)
-        print(type(self.set_time))
+        self.window.textBrowser.append(f'关机时间：{self.set_time}')
 
     def create_shutdown(self):
         if self.window.cycle_radioButton.isChecked():
@@ -57,6 +59,10 @@ class Run:
         res_text = shutdown.stop_shutdown()
         self.window.statusbar.showMessage(res_text, 5000)
 
+    def lock_window(self):
+        command = 'rundll32.exe user32.dll LockWorkStation'
+        os.system(command)
+
     def get_wechat_path(self):
         path = QFileDialog.getOpenFileName(None, '请选择微信执行文件')
         print(path[0])
@@ -65,8 +71,11 @@ class Run:
     def open_wechat(self):
         num = self.window.open_num_spinBox.value()
         wechat_path = self.window.wechat_lineEdit.text()
+        if ' ' in wechat_path:
+            wechat_path = wechat_path[:wechat_path.find(' ')].replace('/', '/"') + wechat_path[wechat_path.find(' '):].replace('/', '"/', 1)
         print(num, type(num), wechat_path)
-        command = f'start {wechat_path}'
+        command = 'start {}'.format(wechat_path)
+        print(command)
         for i in range(num):
             os.system(command)
 

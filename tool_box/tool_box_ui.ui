@@ -176,7 +176,7 @@
         </widget>
        </item>
        <item row="0" column="4">
-        <widget class="QPushButton" name="pushButton_4">
+        <widget class="QPushButton" name="shutdown_now_pushButton">
          <property name="text">
           <string>立即关机</string>
          </property>
@@ -274,6 +274,13 @@
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="1">
         <widget class="QTimeEdit" name="lock_time_timeEdit">
+         <property name="minimumTime">
+          <time>
+           <hour>12</hour>
+           <minute>0</minute>
+           <second>0</second>
+          </time>
+         </property>
          <property name="displayFormat">
           <string>HH:mm:ss</string>
          </property>
