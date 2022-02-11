@@ -20,7 +20,6 @@ class Run:
         self.window.cancel_pushButton.clicked.connect(self.cancel_shutdown) # 取消关机计划
 
         self.window.get_wechat_path_pushButton.clicked.connect(self.get_wechat_path) # 获取微信路径
-
         self.window.start_wechat_pushButton.clicked.connect(self.open_wechat)# 开启微信
 
         self.marge_path = os.getcwd()
@@ -48,6 +47,11 @@ class Run:
         else:
             res_text = shutdown.shutdown(set_time=str(self.set_time))
             self.window.statusbar.showMessage(res_text, 5000)
+
+    def shutdown_now(self):
+        command = 'shutdown -s -t 30'
+        os.system(command)
+        self.window.statusbar.showMessage('30秒后关机，如需取消请点击取消关机', 5000)
 
     def cancel_shutdown(self):
         res_text = shutdown.stop_shutdown()
